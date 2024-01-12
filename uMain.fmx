@@ -3,9 +3,99 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 480
-  ClientWidth = 640
+  ClientWidth = 842
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
+  object btnInstallMariaDB: TButton
+    Enabled = False
+    Position.X = 24.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'Install MariaDB'
+    TextSettings.Trimming = None
+    OnClick = btnInstallMariaDBClick
+  end
+  object lbl_MariaDBInfo: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 38.000000000000000000
+    Size.Width = 633.000000000000000000
+    Size.Height = 91.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.VertAlign = Leading
+    TextSettings.Trimming = None
+    Text = 'lbl_MariaDBInfo'
+    TabOrder = 9
+    object ProgressBar1: TProgressBar
+      Orientation = Horizontal
+      Position.X = 121.000000000000000000
+      Position.Y = -28.000000000000000000
+    end
+  end
+  object RESTClient_MariaDB: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'https://downloads.mariadb.org/rest-api/products'
+    Params = <>
+    SynchronizedEvents = False
+    Left = 760
+    Top = 32
+  end
+  object RESTRequest_MariaDB: TRESTRequest
+    Client = RESTClient_MariaDB
+    Params = <>
+    Response = RESTResponse_MariaDB
+    SynchronizedEvents = False
+    Left = 760
+    Top = 88
+  end
+  object RESTResponse_MariaDB: TRESTResponse
+    Left = 760
+    Top = 152
+  end
+  object RESTResponseDataSetAdapter_MariaDB: TRESTResponseDataSetAdapter
+    Dataset = FDMemTable_MariaDB
+    FieldDefs = <>
+    Response = RESTResponse_MariaDB
+    TypesMode = Rich
+    Left = 760
+    Top = 216
+  end
+  object FDMemTable_MariaDB: TFDMemTable
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 760
+    Top = 280
+  end
+  object DataSource_MariaDB: TDataSource
+    DataSet = FDMemTable_MariaDB
+    Left = 752
+    Top = 352
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = FDMemTable_MariaDB
+    ScopeMappings = <>
+    Left = 760
+    Top = 408
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 676
+    Top = 405
+  end
 end
